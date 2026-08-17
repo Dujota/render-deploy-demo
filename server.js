@@ -63,6 +63,8 @@ app.get('/users/:id/applications/new', applicationsCtrl.new);
 app.post('/users/:id/applications', applicationsCtrl.create);
 app.get('/users/:id/applications/:appId', applicationsCtrl.show);
 app.delete('/users/:id/applications/:appId', applicationsCtrl.delete);
+app.get('/users/:id/applications/:appId/edit', applicationsCtrl.edit);
+app.put('/users/:id/applications/:appId', applicationsCtrl.update);
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);

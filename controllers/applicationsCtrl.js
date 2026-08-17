@@ -58,10 +58,40 @@ const create = async (req, res) => {
   }
 };
 
+const edit = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    const application = user.applications.id(req.params.appId);
+
+    res.render('applications/edit.ejs', { application });
+  } catch (err) {
+    console.log(err);
+    res.redirect('/');
+  }
+};
+
+const update = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    const application = user.applications.id(req.params.appId);
+
+    application.set(req.body);
+
+    await user.save();
+
+    res.redirect(`/users/${user._id}/applications/${application._id}`);
+  } catch (err) {
+    console.log(err);
+    res.redirect('/');
+  }
+};
+
 module.exports = {
   index,
   new: newApp,
   create,
   show,
   delete: deleteApp,
+  edit,
+  update,
 };
