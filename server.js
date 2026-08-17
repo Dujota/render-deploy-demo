@@ -59,6 +59,8 @@ app.get('/auth/sign-out', authCtrl.signout);
 
 // Applications
 app.get('/users/:id/applications', applicationsCtrl.index);
+app.get('/users/:id/applications/new', applicationsCtrl.new);
+app.post('/users/:id/applications', applicationsCtrl.create);
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
