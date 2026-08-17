@@ -22,6 +22,20 @@ const show = async (req, res) => {
   }
 };
 
+const deleteApp = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    user.applications.pull(req.params.appId);
+
+    await user.save();
+
+    res.redirect(`/users/${user._id}/applications`);
+  } catch (err) {
+    console.log(err);
+    res.redirect('/');
+  }
+};
+
 const newApp = async (req, res) => {
   try {
     res.render('applications/new.ejs');
@@ -44,4 +58,10 @@ const create = async (req, res) => {
   }
 };
 
-module.exports = { index, new: newApp, create, show };
+module.exports = {
+  index,
+  new: newApp,
+  create,
+  show,
+  delete: deleteApp,
+};
