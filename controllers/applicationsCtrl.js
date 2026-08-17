@@ -10,6 +10,18 @@ const index = async (req, res) => {
   }
 };
 
+const show = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    const application = user.applications.id(req.params.appId);
+
+    res.render('applications/show.ejs', { application });
+  } catch (err) {
+    console.log(err);
+    res.redirect('/');
+  }
+};
+
 const newApp = async (req, res) => {
   try {
     res.render('applications/new.ejs');
@@ -32,4 +44,4 @@ const create = async (req, res) => {
   }
 };
 
-module.exports = { index, new: newApp, create };
+module.exports = { index, new: newApp, create, show };
