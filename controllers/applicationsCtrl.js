@@ -2,7 +2,9 @@ const User = require('../models/user');
 
 const index = async (req, res) => {
   try {
-    res.render('applications/index.ejs');
+    const user = await User.findById(req.params.id);
+
+    res.render('applications/index.ejs', { applications: user.applications });
   } catch (err) {
     res.redirect('/');
   }
