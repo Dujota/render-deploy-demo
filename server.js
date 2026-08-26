@@ -6,6 +6,7 @@ const express = require('express');
 
 const app = express();
 
+// This is for mongo db proxy
 const isProduction = process.env.NODE_ENV === 'production';
 
 if (isProduction) {
